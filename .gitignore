@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Node (if used for local server)
+node_modules/
+package-lock.json
+
+# Original HEIC image (large, not needed for web)
+*.HEIC
+*.heic
