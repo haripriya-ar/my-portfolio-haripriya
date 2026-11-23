@@ -29,12 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Navbar Scroll ----------
   const navbar = document.querySelector('.navbar');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    navbar.classList.toggle('scrolled', y > 10);
-    lastScroll = y;
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
 
   // ---------- Active Nav Link ----------
@@ -43,17 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function highlightNav() {
     const scrollY = window.scrollY + 120;
+    let currentId = '';
+
     sections.forEach(sec => {
       const top = sec.offsetTop;
       const bottom = top + sec.offsetHeight;
       const id = sec.getAttribute('id');
       if (scrollY >= top && scrollY < bottom) {
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-        });
+        currentId = id;
       }
     });
+
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+    });
   }
+
   window.addEventListener('scroll', highlightNav, { passive: true });
   highlightNav();
 
@@ -68,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.1,
+    rootMargin: '0px 0px -30px 0px'
   });
 
   revealEls.forEach(el => revealObserver.observe(el));
